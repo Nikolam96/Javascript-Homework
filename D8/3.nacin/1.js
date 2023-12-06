@@ -5,36 +5,32 @@ async function fetchDataAndDisplay(){
 		const response = await fetch("https://swapi.dev/api/people/?format=json")
 		const data = await response.json()
 		const results = data.results
-		console.log(results)
+
+		// Table
+
+		var input = Object.keys(results[0])
+		var table = document.querySelector("table")
+		var tr1 = document.createElement("tr")
+		table.appendChild(tr1)
+
+		input.forEach(ele=>{
+			let th = document.createElement("th")
+			tr1.appendChild(th)
+			th.innerText= ele
+		})
 		
-		var thead = document.querySelector("thead")
-		var tbody = document.querySelector("tbody")
-
-		// let input = results.forEach(element => {
-		// 	let obj= element
-		// 	let key = Object.keys(obj)[0]
-		// 	let value = Object.values(obj)[0]
-			
-		// 	let th = document.createElement("th")
-		// 	thead.appendChild(th)
-		// 	th.textContent = key
-
-		// 	let td = document.createElement("td")
-		// 	tbody.appendChild(td)
-		// 	td.textContent = value
-		// });
-		
-		// for(element of results){
-		// 	let th = document.createElement("th")
-		// 	thead.appendChild(th)
-		// 	let name = "Films" 
-		// 	th.textContent = name
-
-		// 	let td = document.createElement("td")
-		// 	tbody.appendChild(td)
-		// 	td.textContent = element.films[0]
-		// }
-	} catch (error){
+		for(let i=0 ;i<results.length;i++){
+				var value = Object.values(results[i])		
+				var tr = document.createElement("tr")
+				
+				value.forEach(ele=>{
+				let td = document.createElement("td")
+				table.appendChild(tr)
+				tr.appendChild(td)
+				td.innerHTML = ele		
+			})
+		}
+	}catch (error){
 		console.log(error)
 	}
 }
